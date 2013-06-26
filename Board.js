@@ -138,14 +138,14 @@
     },
 
     hasAnyMinorDiagonalConflicts: function(){
-      debugger
+  
      for(var key in this.attributes){
        if(key !== 'n'){
         for(var k = 2; k < this.attributes.n; k++){
          var nextKey=(parseInt(key)+k)+"";
          var nextKeyasint=parseInt(nextKey);
          for(var i = nextKey; i < this.attributes.n; i++){
-           for(var j = 0; j < this.attributes.n - 1; j++){
+           for(var j = 0; j < this.attributes.n; j++){
              if(this.attributes[key][j] === 1){
                if(this.attributes[nextKey][j - nextKeyasint] ===1 || this.attributes[nextKey][j + nextKeyasint] ===1){
                  return true;
