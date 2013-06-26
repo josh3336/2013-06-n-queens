@@ -89,14 +89,6 @@
       return false; // fixme
     },
 
-    // hasAnyColConflicts: function(){
-    //   for(var key in this.attributes){
-    //     for(var i = 0; i < this.attributes[key].length; i++){
-
-    //     }
-    //   }
-    // },
-
     hasAnyColConflicts: function(){
     var conflicts=false;
     for(var i = 0; i < this.attributes.n; i++){
@@ -113,8 +105,8 @@
              conflicts = true;
           }
         }
-        return conflicts;
       }
+      return conflicts;
 
       },
 
@@ -123,7 +115,19 @@
     },
 
     hasAnyMajorDiagonalConflicts: function(){
-      return false; // fixme
+      for(var key in this.attributes){
+        if(key !== 'n'){
+          var nextKey=(parseInt(key)+1)+"";
+          for(var i = 0; i < this.attributes.n - 1; i++){
+            if(this.attributes[key][i] === 1){
+              if(this.attributes[nextKey][i - 1] ===1 || this.attributes[nextKey][i + 1] ===1){
+                return true;
+              }
+            }
+          }
+        }
+      }
+      return false;
     },
 
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow){

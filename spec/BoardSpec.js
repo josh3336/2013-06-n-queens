@@ -36,9 +36,9 @@ describe("Board", function() {
 
   it("should find column conflicts", function() {
     verifyConflictTypes(['col', 'rooks', 'queens'], [
-      [1, 0, 0, 0],
+      [0, 1, 0, 0],
       [0, 0, 0, 0],
-      [1, 0, 0, 0],
+      [0, 1, 0, 0],
       [0, 0, 0, 0]
     ]);
   });
