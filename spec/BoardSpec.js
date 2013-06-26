@@ -43,34 +43,40 @@ describe("Board", function() {
   //   ]);
   // });
 
-  // it("should find major diagonal conflicts", function() {
-  //   verifyConflictTypes(['majorDiagonal', 'queens'], [
-  //     [1, 0, 0, 0],
-  //     [0, 1, 0, 0],
-  //     [0, 0, 0, 0],
-  //     [0, 0, 0, 0]
-  //   ]);
-  // });
-
-  it("should find minor diagonal conflicts", function() {
-    verifyConflictTypes(['minorDiagonal', 'queens'], [
-      [1, 0, 0, 0],
-      [0, 0, 0, 0],
+  it("should find major diagonal conflicts", function() {
+    verifyConflictTypes(['majorDiagonal', 'queens'], [
+      [0, 0, 0, 1],
       [0, 0, 1, 0],
+      [0, 0, 0, 0],
       [0, 0, 0, 0]
     ]);
-    verifyConflictTypes(['minorDiagonal', 'queens'], [
-      [1, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 1]
-    ]);
+  });
+
+  it("should find minor diagonal conflicts", function() {
     // verifyConflictTypes(['minorDiagonal', 'queens'], [
-    //   [0, 0, 0, 1],
+    //   [1, 0, 0, 0],
     //   [0, 0, 0, 0],
-    //   [0, 0, 0, 0],
-    //   [1, 0, 0, 0]
+    //   [0, 0, 1, 0],
+    //   [0, 0, 0, 0]
     // ]);
+    // verifyConflictTypes(['minorDiagonal', 'queens'], [
+    //   [1, 0, 0, 0],
+    //   [0, 0, 0, 0],
+    //   [0, 0, 0, 0],
+    //   [0, 0, 0, 1]
+    // ]);
+    //    verifyConflictTypes(['minorDiagonal', 'queens'], [
+    //   [0, 0, 1, 0],
+    //   [0, 0, 0, 0],
+    //   [1, 0, 0, 0],
+    //   [0, 0, 0, 0]
+    // ]);
+    verifyConflictTypes(['minorDiagonal', 'queens'], [
+      [0, 0, 0, 1],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [1, 0, 0, 0]
+    ]);
 
    });
     // verifyConflictTypes(['minorDiagonal', 'queens'], [

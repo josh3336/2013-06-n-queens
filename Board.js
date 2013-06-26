@@ -118,7 +118,10 @@
       for(var key in this.attributes){
         if(key !== 'n'){
           var nextKey=(parseInt(key)+1)+"";
-          for(var i = 0; i < this.attributes.n - 1; i++){
+          if (this.attributes[nextKey] === undefined){
+            return false;
+          }
+          for(var i = 0; i < this.attributes.n; i++){
             if(this.attributes[key][i] === 1){
               if(this.attributes[nextKey][i - 1] ===1 || this.attributes[nextKey][i + 1] ===1){
                 return true;
@@ -135,8 +138,8 @@
     },
 
     hasAnyMinorDiagonalConflicts: function(){
+      debugger
      for(var key in this.attributes){
-      debugger;
        if(key !== 'n'){
         for(var k = 2; k < this.attributes.n; k++){
          var nextKey=(parseInt(key)+k)+"";
