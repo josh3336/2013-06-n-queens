@@ -136,9 +136,10 @@
 
     hasAnyMinorDiagonalConflicts: function(){
      for(var key in this.attributes){
-      
+      debugger;
        if(key !== 'n'){
-         var nextKey=(parseInt(key)+2)+"";
+        for(var k = 2; k < this.attributes.n; k++){
+         var nextKey=(parseInt(key)+k)+"";
          var nextKeyasint=parseInt(nextKey);
          for(var i = nextKey; i < this.attributes.n; i++){
            for(var j = 0; j < this.attributes.n - 1; j++){
@@ -149,6 +150,7 @@
              }
            }
          }
+        }
        }
      }
      return false;
