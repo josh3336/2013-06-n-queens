@@ -62,16 +62,61 @@
     },
 
     hasAnyRowConflicts: function(){
-      return false; // fixme
+
+      var conflicts=false;
+      for(var key in this.attributes){
+        // debugger;
+        if(conflicts === true){
+          break;
+        }
+        if(key !== 'n'){
+          var rowCounter = 0;
+          for(var i = 0; i < this.attributes[key].length; i++){
+            if(this.attributes[key][i] === 1){
+              rowCounter = rowCounter + 1;
+            }
+            if(rowCounter > 1){
+              conflicts = true;
+            }
+         }
+       }
+      }  
+        console.log(conflicts);
+        return conflicts;
     },
 
     hasColConflictAt: function(colIndex){
       return false; // fixme
     },
 
+    // hasAnyColConflicts: function(){
+    //   for(var key in this.attributes){
+    //     for(var i = 0; i < this.attributes[key].length; i++){
+
+    //     }
+    //   }
+    // },
+
     hasAnyColConflicts: function(){
-      return false; // fixme
-    },
+    var conflicts=false;
+    for(var i = 0; i < this.attributes.n; i++){
+        if(conflicts === true){
+          break;
+        }
+        var rowCounter = 0;
+
+        for(var key in this.attributes){
+          if(this.attributes[key][i] === 1){
+            rowCounter = rowCounter + 1;
+          }
+          if(rowCounter > 1){
+             conflicts = true;
+          }
+        }
+        return conflicts;
+      }
+
+      },
 
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow){
       return false; // fixme
