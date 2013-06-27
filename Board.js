@@ -26,6 +26,8 @@
     },
 
     _getFirstRowColumnIndexForMinorDiagonalOn: function(rowIndex, colIndex){
+      //console.log(rowIndex,colIndex)
+
       return colIndex + rowIndex;
     },
 
@@ -103,6 +105,7 @@
     },
 
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow){
+
       var column = majorDiagonalColumnIndexAtFirstRow;
       var n = this.get('n');
       var conflict = 0;
@@ -117,26 +120,41 @@
     },
 
     hasAnyMajorDiagonalConflicts: function(){
-      for(var row in this.attributes){
-        if(row !== 'n'){
-          var nextRow=(parseInt(row)+1)+"";
-          if (this.attributes[nextRow] === undefined){
-            return false;
-          }
-          for(var column = 0; column < this.attributes.n; column++){
-            if(this.attributes[row][column] === 1){
-              if(this.attributes[nextRow][column - 1] ===1 || this.attributes[nextRow][column + 1] ===1){
-                return true;
+     for(var key in this.attributes){
+       if(key !== 'n'){
+        for(var k = 2; k < this.attributes.n; k++){
+          var nextKey=(parseInt(key)+k)+"";
+          var nextKeyasint=parseInt(nextKey);
+          for(var i = nextKey; i < this.attributes.n; i++){
+            for(var j = 0; j < this.attributes.n; j++){
+              if(this.attributes[key][j] === 1){
+                if(this.attributes[nextKey][j + nextKeyasint] ===1){
+                  check_count=_getFirstRowColumnIndexForMajorDiagonalOn(key,j);
+                  return true;
+                }
               }
             }
           }
         }
-      }
-      return false;
-    },
+       }
+     }
+     return false;
+  },
 
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow){
-      return false; // fixme
+      var column = minorDiagonalColumnIndexAtFirstRow;
+      var n = this.get('n');
+      var conflict = 0;
+      console.log('column',column)
+      for(var row = 0; row < n  && column > 0; row++, column--){
+        if(row < 0 || column < 0) continue;
+        console.log(this.get(row))
+        if(this.get(row)[column]){
+          conflict ++;
+          if(conflict > 1) return true;
+        }
+      }
+      return false;
     },
 
     hasAnyMinorDiagonalConflicts: function(){
@@ -149,7 +167,7 @@
           for(var i = nextKey; i < this.attributes.n; i++){
             for(var j = 0; j < this.attributes.n; j++){
               if(this.attributes[key][j] === 1){
-                if(this.attributes[nextKey][j - nextKeyasint] ===1 || this.attributes[nextKey][j + nextKeyasint] ===1){
+                if(this.attributes[nextKey][j - nextKeyasint] ===1){
                   return true;
                 }
               }
