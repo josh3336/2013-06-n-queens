@@ -103,19 +103,29 @@
     },
 
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow){
-      return false; // fixme
+      var column = majorDiagonalColumnIndexAtFirstRow;
+      var n = this.get('n');
+      var conflict = 0;
+      for(var row = 0; row < n  && column < n; row++, column++){
+        if(row < 0 || column < 0) continue;
+        if(this.get(row)[column]){
+          conflict ++;
+          if(conflict > 1) return true;
+        }
+      }
+      return false;
     },
 
     hasAnyMajorDiagonalConflicts: function(){
       for(var row in this.attributes){
         if(row !== 'n'){
-          var nextColumn=(parseInt(row)+1)+"";
-          if (this.attributes[nextColumn] === undefined){
+          var nextRow=(parseInt(row)+1)+"";
+          if (this.attributes[nextRow] === undefined){
             return false;
           }
           for(var column = 0; column < this.attributes.n; column++){
             if(this.attributes[row][column] === 1){
-              if(this.attributes[nextColumn][column - 1] ===1 || this.attributes[nextColumn][column + 1] ===1){
+              if(this.attributes[nextRow][column - 1] ===1 || this.attributes[nextRow][column + 1] ===1){
                 return true;
               }
             }
