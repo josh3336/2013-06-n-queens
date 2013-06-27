@@ -107,15 +107,15 @@
     },
 
     hasAnyMajorDiagonalConflicts: function(){
-      for(var key in this.attributes){
-        if(key !== 'n'){
-          var nextKey=(parseInt(key)+1)+"";
-          if (this.attributes[nextKey] === undefined){
+      for(var row in this.attributes){
+        if(row !== 'n'){
+          var nextColumn=(parseInt(row)+1)+"";
+          if (this.attributes[nextColumn] === undefined){
             return false;
           }
-          for(var i = 0; i < this.attributes.n; i++){
-            if(this.attributes[key][i] === 1){
-              if(this.attributes[nextKey][i - 1] ===1 || this.attributes[nextKey][i + 1] ===1){
+          for(var column = 0; column < this.attributes.n; column++){
+            if(this.attributes[row][column] === 1){
+              if(this.attributes[nextColumn][column - 1] ===1 || this.attributes[nextColumn][column + 1] ===1){
                 return true;
               }
             }
