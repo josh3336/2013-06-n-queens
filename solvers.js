@@ -2,15 +2,38 @@
 // hint: you'll need to do a full-search of all possible arrangements of pieces!
 // (There are also optimizations that will allow you to skip a lot of the dead search space)
 
-window.findNRooksSolution = function(n){
-  var solution = undefined; //fixme
 
+
+window.findNRooksSolution = function(n){
+
+
+  //var solution = undefined; //fixme
+  var board = new Board(makeEmptyMatrix(n));
+  var count = 0;
+
+  var checkDeeper = function(board){
+    for (var row = 0; row<n; row++){
+      for (var column = 0; column<n; column++){
+        board[row][column] = 1;
+        if ( board.hasAnyColConflicts() || board.hasAnyRowConflicts() ){
+          return;
+        } else{
+          checkDeeper(boardCopy);
+        }
+      }
+    }
+
+
+  };
   console.log('Single solution for ' + n + ' rooks:', solution);
   return solution;
 };
 
 window.countNRooksSolutions = function(n){
   var solutionCount = undefined; //fixme
+
+
+
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
@@ -39,4 +62,14 @@ window.displayBoard = function(matrix){
       model: new Board(matrix)
     }).render()
   );
+};
+
+
+
+var makeEmptyMatrix = function(n){
+  return _(_.range(n)).map(function(){
+    return _(_.range(n)).map(function(){
+      return 0;
+    });
+  });
 };

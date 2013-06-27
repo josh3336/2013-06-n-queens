@@ -100,8 +100,9 @@
         if(this.hasColConflictAt(column)){
           return true;
         }
-        return false;
       }
+      return false;
+
     },
 
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow){
