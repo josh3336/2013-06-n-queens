@@ -122,14 +122,13 @@
     hasAnyMajorDiagonalConflicts: function(){
      for(var key in this.attributes){
        if(key !== 'n'){
-        for(var k = 2; k < this.attributes.n; k++){
+        for(var k = 1; k < this.attributes.n; k++){
           var nextKey=(parseInt(key)+k)+"";
           var nextKeyasint=parseInt(nextKey);
           for(var i = nextKey; i < this.attributes.n; i++){
             for(var j = 0; j < this.attributes.n; j++){
               if(this.attributes[key][j] === 1){
-                if(this.attributes[nextKey][j + nextKeyasint] ===1){
-                  check_count=_getFirstRowColumnIndexForMajorDiagonalOn(key,j);
+                if(this.attributes[nextKey][j + k] ===1){
                   return true;
                 }
               }
@@ -142,14 +141,14 @@
   },
 
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow){
-      var column = minorDiagonalColumnIndexAtFirstRow;
+      var colrow = minorDiagonalColumnIndexAtFirstRow;
       var n = this.get('n');
       var conflict = 0;
-      console.log('column',column)
-      for(var row = 0; row < n  && column > 0; row++, column--){
-        if(row < 0 || column < 0) continue;
+      console.log('column',colrow)
+      for(var row = 0; row < n  && colrow >= 0; row++, colrow--){
+        if(row < 0 || colrow < 0) continue;
         console.log(this.get(row))
-        if(this.get(row)[column]){
+        if(this.get(row)[colrow]){
           conflict ++;
           if(conflict > 1) return true;
         }
@@ -161,13 +160,13 @@
   
      for(var key in this.attributes){
        if(key !== 'n'){
-        for(var k = 2; k < this.attributes.n; k++){
+        for(var k = 1; k < this.attributes.n; k++){
           var nextKey=(parseInt(key)+k)+"";
           var nextKeyasint=parseInt(nextKey);
           for(var i = nextKey; i < this.attributes.n; i++){
             for(var j = 0; j < this.attributes.n; j++){
               if(this.attributes[key][j] === 1){
-                if(this.attributes[nextKey][j - nextKeyasint] ===1){
+                if(this.attributes[nextKey][j - k] ===1){
                   return true;
                 }
               }
