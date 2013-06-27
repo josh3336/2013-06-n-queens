@@ -58,31 +58,25 @@
     // todo: fill in all these functions - they'll help you!
 
     hasRowConflictAt: function(rowIndex){
-      return false; // fixme
+      var rowCounter = 0;
+      for(var i = 0; i < this.attributes[rowIndex].length; i++){
+        if(this.attributes[rowIndex][i] === 1){
+          rowCounter = rowCounter + 1;
+        }
+        if(rowCounter > 1){
+          return true;
+        }
+      }
+      return false;
     },
 
     hasAnyRowConflicts: function(){
-
-      var conflicts=false;
-      for(var key in this.attributes){
-        // debugger;
-        if(conflicts === true){
-          break;
+      for(var row in this.attributes){
+        if(row !== 'n' && this.hasRowConflictAt(row)) {
+          return true;
         }
-        if(key !== 'n'){
-          var rowCounter = 0;
-          for(var i = 0; i < this.attributes[key].length; i++){
-            if(this.attributes[key][i] === 1){
-              rowCounter = rowCounter + 1;
-            }
-            if(rowCounter > 1){
-              conflicts = true;
-            }
-         }
-       }
-      }  
-        console.log(conflicts);
-        return conflicts;
+      }
+      return false;
     },
 
     hasColConflictAt: function(colIndex){
@@ -142,17 +136,17 @@
      for(var key in this.attributes){
        if(key !== 'n'){
         for(var k = 2; k < this.attributes.n; k++){
-         var nextKey=(parseInt(key)+k)+"";
-         var nextKeyasint=parseInt(nextKey);
-         for(var i = nextKey; i < this.attributes.n; i++){
-           for(var j = 0; j < this.attributes.n; j++){
-             if(this.attributes[key][j] === 1){
-               if(this.attributes[nextKey][j - nextKeyasint] ===1 || this.attributes[nextKey][j + nextKeyasint] ===1){
-                 return true;
-               }
-             }
-           }
-         }
+          var nextKey=(parseInt(key)+k)+"";
+          var nextKeyasint=parseInt(nextKey);
+          for(var i = nextKey; i < this.attributes.n; i++){
+            for(var j = 0; j < this.attributes.n; j++){
+              if(this.attributes[key][j] === 1){
+                if(this.attributes[nextKey][j - nextKeyasint] ===1 || this.attributes[nextKey][j + nextKeyasint] ===1){
+                  return true;
+                }
+              }
+            }
+          }
         }
        }
      }
