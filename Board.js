@@ -80,29 +80,27 @@
     },
 
     hasColConflictAt: function(colIndex){
-      return false; // fixme
+      var columnCounter = 0;
+
+      for(var row in this.attributes){
+        if(this.attributes[row][colIndex] === 1){
+          columnCounter = columnCounter + 1;
+        }
+        if(columnCounter > 1){
+           return true;
+        }
+      }
+      return false;
     },
 
     hasAnyColConflicts: function(){
-    var conflicts=false;
-    for(var i = 0; i < this.attributes.n; i++){
-        if(conflicts === true){
-          break;
+      for(var column = 0; column < this.attributes.n; column++){
+        if(this.hasColConflictAt(column)){
+          return true;
         }
-        var rowCounter = 0;
-
-        for(var key in this.attributes){
-          if(this.attributes[key][i] === 1){
-            rowCounter = rowCounter + 1;
-          }
-          if(rowCounter > 1){
-             conflicts = true;
-          }
-        }
+        return false;
       }
-      return conflicts;
-
-      },
+    },
 
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow){
       return false; // fixme
